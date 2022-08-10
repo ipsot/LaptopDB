@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище MyLaptopDBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="LaptopSpecifications">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idManufacturer" Type="int" Nullable="false" />
+    <Property Name="Model" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CoreCount" Type="int" Nullable="false" />
+    <Property Name="VideoMemory" Type="int" Nullable="false" />
+    <Property Name="RAM" Type="int" Nullable="false" />
+    <Property Name="HDD" Type="int" Nullable="false" />
+    <Property Name="SSD" Type="int" Nullable="false" />
+    <Property Name="Price" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ManufacturerProduct">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Manufacturer" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_LaptopSpecifications_ManufacturerProduct">
+    <End Role="ManufacturerProduct" Type="Self.ManufacturerProduct" Multiplicity="1" />
+    <End Role="LaptopSpecifications" Type="Self.LaptopSpecifications" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ManufacturerProduct">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="LaptopSpecifications">
+        <PropertyRef Name="idManufacturer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище MyLaptopDBModelContainer">
+    <EntitySet Name="LaptopSpecifications" EntityType="Self.LaptopSpecifications" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ManufacturerProduct" EntityType="Self.ManufacturerProduct" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_LaptopSpecifications_ManufacturerProduct" Association="Self.FK_LaptopSpecifications_ManufacturerProduct">
+      <End Role="ManufacturerProduct" EntitySet="ManufacturerProduct" />
+      <End Role="LaptopSpecifications" EntitySet="LaptopSpecifications" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MyLaptopDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="LaptopSpecification">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idManufacturer" Type="Int32" Nullable="false" />
+    <Property Name="Model" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CoreCount" Type="Int32" Nullable="false" />
+    <Property Name="VideoMemory" Type="Int32" Nullable="false" />
+    <Property Name="RAM" Type="Int32" Nullable="false" />
+    <Property Name="HDD" Type="Int32" Nullable="false" />
+    <Property Name="SSD" Type="Int32" Nullable="false" />
+    <Property Name="Price" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ManufacturerProduct" Relationship="Self.FK_LaptopSpecifications_ManufacturerProduct" FromRole="LaptopSpecifications" ToRole="ManufacturerProduct" />
+  </EntityType>
+  <EntityType Name="ManufacturerProduct">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Manufacturer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="LaptopSpecifications" Relationship="Self.FK_LaptopSpecifications_ManufacturerProduct" FromRole="ManufacturerProduct" ToRole="LaptopSpecifications" />
+  </EntityType>
+  <Association Name="FK_LaptopSpecifications_ManufacturerProduct">
+    <End Role="ManufacturerProduct" Type="Self.ManufacturerProduct" Multiplicity="1" />
+    <End Role="LaptopSpecifications" Type="Self.LaptopSpecification" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ManufacturerProduct">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="LaptopSpecifications">
+        <PropertyRef Name="idManufacturer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MyLaptopDBEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="LaptopSpecifications" EntityType="Self.LaptopSpecification" />
+    <EntitySet Name="ManufacturerProducts" EntityType="Self.ManufacturerProduct" />
+    <AssociationSet Name="FK_LaptopSpecifications_ManufacturerProduct" Association="Self.FK_LaptopSpecifications_ManufacturerProduct">
+      <End Role="ManufacturerProduct" EntitySet="ManufacturerProducts" />
+      <End Role="LaptopSpecifications" EntitySet="LaptopSpecifications" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

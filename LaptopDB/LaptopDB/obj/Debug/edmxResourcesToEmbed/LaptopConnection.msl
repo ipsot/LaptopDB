@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище MyLaptopDBModelContainer" CdmEntityContainer="MyLaptopDBEntities1">
+    <EntitySetMapping Name="LaptopSpecifications">
+      <EntityTypeMapping TypeName="MyLaptopDBModel.LaptopSpecification">
+        <MappingFragment StoreEntitySet="LaptopSpecifications">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="idManufacturer" ColumnName="idManufacturer" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="CoreCount" ColumnName="CoreCount" />
+          <ScalarProperty Name="VideoMemory" ColumnName="VideoMemory" />
+          <ScalarProperty Name="RAM" ColumnName="RAM" />
+          <ScalarProperty Name="HDD" ColumnName="HDD" />
+          <ScalarProperty Name="SSD" ColumnName="SSD" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ManufacturerProducts">
+      <EntityTypeMapping TypeName="MyLaptopDBModel.ManufacturerProduct">
+        <MappingFragment StoreEntitySet="ManufacturerProduct">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Manufacturer" ColumnName="Manufacturer" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
